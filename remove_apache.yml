@@ -6,7 +6,7 @@
           
   - name: removing apache2 package
     apt:
-      name: apache2
+      name: apache2 
       state: absent
 
   - name: removing php support for apache
