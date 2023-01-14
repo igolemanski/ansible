@@ -1,1 +1,8 @@
+[web_servers]
 10.123.74.22
+
+[db_servers]
+10.123.74.22
+
+[file_servers]
+10.123.74.22 
