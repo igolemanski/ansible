@@ -9,7 +9,7 @@
     dnf:
       update_only: yes
       update_cache: yes
-    when: ansible_distribution == "CentOs"
+    when: ansible_distribution == "CentOS"
 
   - name: install updates (Ubuntu)
     tags: always
@@ -58,6 +58,22 @@
       state: latest
     when: ansible_distribution == "CentOS"
 
+  - name: change of email address CentOS
+    tags: apache,httpd,centos
+    lineinfile:
+      path: /etc/httpd/conf/httpd.conf
+      regexp: '^ServerAdmin'
+      line: ServerAdmin some@email.com
+    when: ansible_distribution == "CentOS"
+    register: httpd
+
+  - name: restart httpd (CentOS)
+    tags: apache,centos,httpd
+    service:
+      name: httpd
+      state: restarted
+    when: httpd.changed 
+
   - name: copy default html file for site
     tags: apache,apache2,httpd
     copy:
@@ -66,6 +82,14 @@
       owner: root
       group: root
       mode: 0644
+
+  - name: start httpd (CentOS)
+    tags: apache,centos,httpd
+    service:
+      name: httpd
+      state: started
+      enabled: yes
+    when: ansible_distribution == "CentOS"
 
 
 - hosts: db_servers
