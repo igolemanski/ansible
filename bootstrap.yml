@@ -32,7 +32,7 @@
     tags: always
     authorized_key:
       user: simone
-      key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGb3ivsfX/CcKELbkTnwUuiC0N5kTPD8pkgl0n0BIAKt ansible default"
+      key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGb3ivsfX/CcKELbkTnwUuiC0N5kTPD8pkgl0n0BIAKt ansible"
    
   - name: add sudoers file for simone
     tags: always
