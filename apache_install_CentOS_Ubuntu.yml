@@ -1,0 +1,44 @@
+---
+
+- hosts: all
+  become: yes
+  tasks:
+
+
+#Will work only if the system is Ubuntu or Debian
+    - name: update repository index
+      apt:
+        update_cache: yes
+      when: ansible_distribution_version == "20.04" and  ansible_distribution in ["Debian", "Ubuntu"]
+
+    - name: apache2 install
+      apt:
+        name: apache2
+        state: latest
+      when: ansible_distribution == "Ubuntu"
+
+    - name: add php support for apache
+      apt:
+        name: libapache2-mod-php
+        state: latest 
+      when: ansible_distribution == "Ubuntu"
+
+
+#Will work only if the system is CentOS
+    - name: update repository index
+      dnf:
+        update_cache: yes
+      when: ansible_distribution_version == "8" and  ansible_distribution == "CentOS"
+
+    - name: apache2 install
+      dnf:
+        name: httpd
+        state: latest
+      when: ansible_distribution == "CentOS"
+
+    - name: add php support for apache
+      dnf:
+        name: php
+        state: latest
+      when: ansible_distribution == "CentOS"
+
