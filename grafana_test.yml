@@ -1,6 +1,0 @@
-- hosts: workstations
-  become: yes
-  tasks:
-    - name: Grafana installation
-      apt:
-        name: grafana
