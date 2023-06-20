@@ -1,0 +1,7 @@
+- name: debug mode
+  hosts: all
+  become: true
+  tasks:
+    - name: root test
+      ansible.builtin.debug:
+        msg: "successful"
