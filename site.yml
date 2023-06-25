@@ -24,7 +24,48 @@
         - libapache2-mod-php
       state: latest
     when: ansible_distribution == "Ubuntu"
-  
+
+  - name: start apache2
+    tags: apache2,apache,ubuntu,start
+    service:
+      name: apache2
+      state: started
+      enabled: yes
+    when: ansible_distribution == "Ubuntu"
+
+  - name: change Apache timeout
+    tags: email,apache,ubuntu,timeout
+    lineinfile:
+      path: /etc/apache2/apache2.conf
+      regexp: '^Timeout'
+      line: Timeout 350
+    when: ansible_distribution == "Ubuntu"
+    register: apache2
+
+  - name: restart apache2 (Ubuntu)
+    tags: apache,ubuntu,apache2
+    service:
+      name: apache2
+      state: restarted
+    when: apache2.changed
+
+- hosts: workstations
+  become: true
+  tasks:
+
+  - name: install unzip
+    package:
+      name: unzip
+
+  - name: install terraform
+    unarchive:
+      src: https://releases.hashicorp.com/terraform/1.5.1/terraform_1.5.1_linux_amd64.zip
+      dest: /usr/local/bin
+      remote_src: yes
+      mode: 0755
+      owner: root
+      group: root
+      
   - name: copy default html file for site
     tags: apache, apache2,httpd
     copy:

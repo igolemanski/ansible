@@ -6,3 +6,6 @@
 
 [file_servers] 
 10.123.74.47
+
+[workstations]
+10.123.74.44
