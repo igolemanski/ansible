@@ -1,0 +1,40 @@
+- name: Install apache and php for Ubuntu
+  tags: apache,apache2,ubuntu
+  apt:
+    name:
+      - "{{ apache_package_name }}"
+      - "{{ php_package_name }}"
+    state: latest
+
+- name: start and enable apache service
+  tags: ubuntu,apache,apache2
+  service:
+    name: "{{ apache_service }}"
+    state: started
+    enabled: yes
+
+- name: change Apache timeout
+  tags: apache,ubuntu,timeout
+  lineinfile:
+    path: /etc/apache2/apache2.conf
+    regexp: '^Timeout'
+    line: Timeout 355
+  when: ansible_distribution == "Ubuntu"
+  register: apache2
+
+- name: restart apache2 (Ubuntu)
+  tags: apache,ubuntu,apache2
+  service:
+    name: "{{ apache_service }}" 
+    state: restarted
+  when: apache2.changed
+
+- name: copy default html file for site
+  tags: apache,apache2,httpd
+  copy:
+    src: default_site.html
+    dest: /var/www/html/index.html
+    owner: root
+    group: root
+    mode: 0644
+
