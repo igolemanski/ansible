@@ -1,0 +1,4 @@
+noto_conf_path: /root/script/configs
+noto_conf_name: noto.conf
+ps_twtty_path: /root/script
+ps_twtty_users: [root, ubuntu]

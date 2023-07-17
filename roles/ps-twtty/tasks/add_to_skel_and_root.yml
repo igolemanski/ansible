@@ -1,0 +1,9 @@
+- name: "Load ps-twtty to skel"
+  lineinfile:
+    path: '/etc/skel/.bashrc'
+    line: "[ -f {{ ps_twtty_path }}/ps-twtty-7.sh ] && source {{ ps_twtty_path }}/ps-twtty-7.sh"
+
+- name: "Load ps-twtty to root"
+  lineinfile:
+    path: '/root/.bashrc'
+    line: "[ -f {{ ps_twtty_path }}/ps-twtty-7.sh ] && source {{ ps_twtty_path }}/ps-twtty-7.sh"

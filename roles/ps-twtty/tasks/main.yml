@@ -1,0 +1,30 @@
+- name: "Create noto dir"
+  file:
+    path: "{{ noto_conf_path }}"
+    state: directory
+  become: true
+
+- name: "Copy noto conf to noto conf path"
+  template:
+    src: noto.conf.j2
+    dest: "{{ noto_conf_path }}/{{ noto_conf_name }}"
+    mode: 0644
+  become: true
+
+- name: "Create ps-twtty-7 dir"
+  file:
+    path: "{{ ps_twtty_path }}"
+    state: directory
+  become: true
+
+- name: "Copy ps-twtty-7.sh"
+  template:
+    src: ps-twtty-7.sh.j2
+    dest: "{{ ps_twtty_path }}/ps-twtty-7.sh"
+    mode: 0644
+  become: true
+
+- include_tasks: load_ps_twtty.yml
+  loop: "{{ ps_twtty_users }}"
+
+- include_tasks: add_to_skel_and_root.yml

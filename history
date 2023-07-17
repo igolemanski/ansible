@@ -1,0 +1,7 @@
+10.123.74.22:
+  hosts:
+    10.123.74.22:
+      ansible_shell_allow_world_readable_temp: true
+      noto_env_name: "LOCAL ENV"
+      ps_twtty_users: [root, ubuntu, john]
+

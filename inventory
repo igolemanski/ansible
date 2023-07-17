@@ -1,11 +1,30 @@
-[web_servers]
-10.123.74.22
+lxd:
+  hosts:
+    vm01:
+      ansible_host: 10.123.74.22
+      noto_env_name: "TASK1"
+      ps_twtty_users: [root, ubuntu]
+    vm02:
+      ansible_host: 10.123.74.125
+      noto_env_name: "TASK2"
+      ps_twtty_users: [root, ubuntu]
+    vm03:
+      ansible_host: 10.123.74.47
+      noto_env_name: "TASK3"
+      ps_twtty_users: [root, ubuntu]
+    vm04:
+      ansible_host: 10.123.74.44
+      noto_env_name: "TASK4"
+      ps_twtty_users: [root, ubuntu]
 
-[db_servers]
-10.123.74.125
+#[web_servers]
+#10.123.74.22
 
-[file_servers] 
-10.123.74.47
+#[db_servers]
+#10.123.74.125
 
-[workstations]
-10.123.74.44
+#[file_servers] 
+#10.123.74.47
+
+#[workstations]
+#10.123.74.44
